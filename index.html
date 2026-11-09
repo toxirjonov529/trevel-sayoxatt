@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TRAVEL UZ — Sayohat olami</title>
+  <meta name="description" content="TRAVEL UZ: Turkiya, Dubay, Shveysariya, Maldiv, Samarqand va Buxoro yo'nalishlari bo'yicha sayohat paketlari." />
+  <meta name="theme-color" content="#0f4c5c" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #fbf8f3;
+      --surface: #ffffff;
+      --ink: #14262c;
+      --muted: #5b6b70;
+      --primary: #0f4c5c;
+      --primary-dark: #0a3641;
+      --accent: #e36414;
+      --line: #e7e1d6;
+      --radius: 18px;
+      --shadow: 0 10px 30px -12px rgba(15, 76, 92, 0.25);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+    body {
+      font-family: "Inter", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    h1, h2, h3 { font-family: "Fraunces", Georgia, serif; line-height: 1.15; }
+    .container { width: min(1160px, 92%); margin-inline: auto; }
+    .section { padding: 88px 0; }
+    .eyebrow {
+      display: inline-block; font-size: 13px; font-weight: 600; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 12px;
+    }
+    .section-title { font-size: clamp(28px, 4vw, 42px); margin-bottom: 12px; }
+    .section-lead { color: var(--muted); max-width: 560px; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 14px 26px; border-radius: 999px; font-weight: 600; font-size: 15px;
+      border: 1px solid transparent; cursor: pointer; transition: transform .2s, background .2s, box-shadow .2s;
+      font-family: inherit;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-accent { background: var(--accent); color: #fff; }
+    .btn-accent:hover { background: #c9560f; box-shadow: 0 10px 20px -8px rgba(227,100,20,.6); }
+    .btn-ghost { background: rgba(255,255,255,.14); color: #fff; border-color: rgba(255,255,255,.5); backdrop-filter: blur(6px); }
+    .btn-ghost:hover { background: rgba(255,255,255,.25); }
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-primary:hover { background: var(--primary-dark); }
+    :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+
+    /* Header */
+    header.site {
+      position: fixed; inset: 0 0 auto 0; z-index: 50; transition: background .3s, box-shadow .3s;
+    }
+    header.site.scrolled { background: rgba(251,248,243,.92); backdrop-filter: blur(10px); box-shadow: 0 1px 0 var(--line); }
+    .nav { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+    .logo { font-family: "Fraunces", serif; font-weight: 700; font-size: 22px; color: #fff; letter-spacing: .02em; }
+    .logo span { color: var(--accent); }
+    header.scrolled .logo { color: var(--primary); }
+    .nav ul { display: flex; gap: 30px; list-style: none; }
+    .nav ul a { font-size: 15px; font-weight: 500; color: rgba(255,255,255,.9); transition: color .2s; }
+    header.scrolled .nav ul a { color: var(--ink); }
+    .nav ul a:hover { color: var(--accent); }
+    .menu-btn { display: none; background: none; border: 0; color: #fff; cursor: pointer; padding: 8px; }
+    header.scrolled .menu-btn { color: var(--ink); }
+
+    /* Hero */
+    .hero {
+      position: relative; min-height: 100svh; display: flex; align-items: center; color: #fff;
+      background: linear-gradient(180deg, rgba(10,54,65,.55), rgba(10,54,65,.75)), url("img/hero.png") center/cover no-repeat;
+    }
+    .hero-inner { padding: 120px 0 90px; max-width: 720px; }
+    .hero h1 { font-size: clamp(38px, 7vw, 76px); margin-bottom: 20px; }
+    .hero h1 em { color: #ffb677; font-style: normal; }
+    .hero p { font-size: clamp(16px, 2vw, 19px); color: rgba(255,255,255,.88); max-width: 540px; margin-bottom: 32px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; }
+    .stats {
+      position: absolute; left: 0; right: 0; bottom: 0; background: rgba(10,54,65,.55); backdrop-filter: blur(10px);
+      border-top: 1px solid rgba(255,255,255,.18);
+    }
+    .stats .container { display: grid; grid-template-columns: repeat(3, 1fr); padding: 18px 0; text-align: center; }
+    .stats strong { display: block; font-family: "Fraunces", serif; font-size: clamp(22px, 3vw, 32px); }
+    .stats span { font-size: 13px; color: rgba(255,255,255,.75); }
+
+    /* Destinations */
+    .dest-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 44px; }
+    .dest {
+      position: relative; border-radius: var(--radius); overflow: hidden; aspect-ratio: 4/5; box-shadow: var(--shadow);
+      color: #fff; display: flex; align-items: flex-end;
+    }
+    .dest img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .6s; }
+    .dest:hover img { transform: scale(1.07); }
+    .dest::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 45%, rgba(8,32,40,.85)); }
+    .dest div { position: relative; z-index: 1; padding: 22px; }
+    .dest h3 { font-size: 26px; }
+    .dest p { font-size: 14px; color: rgba(255,255,255,.85); }
+
+    /* Packages */
+    .packages { background: #f2ece1; }
+    .filters { display: flex; flex-wrap: wrap; gap: 10px; margin: 32px 0 36px; }
+    .chip {
+      padding: 9px 18px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface);
+      font-size: 14px; font-weight: 500; cursor: pointer; font-family: inherit; color: var(--ink); transition: all .2s;
+    }
+    .chip:hover { border-color: var(--primary); }
+    .chip[aria-pressed="true"] { background: var(--primary); color: #fff; border-color: var(--primary); }
+    .pkg-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .pkg { background: var(--surface); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); display: flex; flex-direction: column; transition: transform .25s; }
+    .pkg:hover { transform: translateY(-6px); }
+    .pkg-img { position: relative; aspect-ratio: 16/10; overflow: hidden; }
+    .pkg-img img { width: 100%; height: 100%; object-fit: cover; }
+    .tag { position: absolute; top: 14px; left: 14px; background: rgba(255,255,255,.94); color: var(--primary); font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 999px; }
+    .pkg-body { padding: 22px; display: flex; flex-direction: column; flex: 1; }
+    .pkg-body h3 { font-size: 24px; }
+    .country { color: var(--muted); font-size: 14px; margin-bottom: 14px; }
+    .perks { list-style: none; display: grid; gap: 6px; margin-bottom: 20px; font-size: 14px; }
+    .perks li::before { content: "✓"; color: var(--accent); font-weight: 700; margin-right: 8px; }
+    .pkg-foot { margin-top: auto; display: flex; align-items: center; justify-content: space-between; padding-top: 16px; border-top: 1px solid var(--line); }
+    .price small { display: block; font-size: 12px; color: var(--muted); }
+    .price strong { font-family: "Fraunces", serif; font-size: 26px; color: var(--primary); }
+    .days { font-size: 14px; color: var(--muted); }
+    .pkg-foot .btn { padding: 10px 18px; font-size: 14px; }
+    .pkg.hidden { display: none; }
+
+    /* Gallery */
+    .gallery { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 220px; gap: 14px; margin-top: 44px; }
+    .gallery a { border-radius: 14px; overflow: hidden; position: relative; }
+    .gallery a:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+    .gallery a:nth-child(4) { grid-column: span 2; }
+    .gallery img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s; }
+    .gallery a:hover img { transform: scale(1.06); }
+
+    /* Testimonials */
+    .reviews { background: var(--primary); color: #fff; }
+    .reviews .eyebrow { color: #ffb677; }
+    .reviews .section-lead { color: rgba(255,255,255,.75); }
+    .rev-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 44px; }
+    .rev { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.16); border-radius: var(--radius); padding: 28px; }
+    .stars { color: #ffb677; letter-spacing: 3px; margin-bottom: 14px; }
+    .rev p { margin-bottom: 20px; }
+    .rev strong { display: block; }
+    .rev span { font-size: 14px; color: rgba(255,255,255,.7); }
+
+    /* Contact */
+    .contact-wrap { display: grid; grid-template-columns: 1fr 1.1fr; gap: 56px; align-items: start; }
+    .info { margin-top: 28px; display: grid; gap: 14px; color: var(--muted); }
+    .info b { color: var(--ink); }
+    form { background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow); padding: 32px; display: grid; gap: 18px; }
+    .field { display: grid; gap: 6px; }
+    label { font-size: 14px; font-weight: 600; }
+    input, select, textarea {
+      font: inherit; padding: 13px 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--bg); color: var(--ink); width: 100%;
+    }
+    input:focus, select:focus, textarea:focus { outline: 2px solid var(--primary); border-color: transparent; }
+    textarea { min-height: 110px; resize: vertical; }
+    .form-msg { font-size: 14px; color: #1b7a4b; font-weight: 500; min-height: 20px; }
+
+    footer.site { background: var(--primary-dark); color: rgba(255,255,255,.75); padding: 40px 0; font-size: 14px; }
+    footer .container { display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; align-items: center; }
+    footer .logo { color: #fff; }
+
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .reveal { opacity: 1; transform: none; transition: none; }
+      * { transition: none !important; }
+    }
+
+    @media (max-width: 960px) {
+      .dest-grid, .pkg-grid, .rev-grid { grid-template-columns: repeat(2, 1fr); }
+      .contact-wrap { grid-template-columns: 1fr; gap: 36px; }
+      .gallery { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 720px) {
+      .section { padding: 64px 0; }
+      .menu-btn { display: block; }
+      .nav ul {
+        position: absolute; top: 72px; left: 0; right: 0; flex-direction: column; gap: 0;
+        background: var(--bg); padding: 8px 4%; box-shadow: 0 12px 24px rgba(0,0,0,.1); display: none;
+      }
+      .nav ul.open { display: flex; }
+      .nav ul a, header.scrolled .nav ul a { display: block; padding: 14px 0; color: var(--ink); border-bottom: 1px solid var(--line); }
+      .dest-grid, .pkg-grid, .rev-grid { grid-template-columns: 1fr; }
+      .dest { aspect-ratio: 16/11; }
+      .gallery { grid-auto-rows: 160px; }
+      .gallery a:nth-child(1) { grid-column: span 2; grid-row: span 1; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site" id="header">
+    <nav class="container nav" aria-label="Asosiy menyu">
+      <a href="#bosh" class="logo">TRAVEL<span> UZ</span></a>
+      <button class="menu-btn" id="menuBtn" aria-label="Menyuni ochish" aria-expanded="false" aria-controls="menu">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+      <ul id="menu">
+        <li><a href="#yonalishlar">Yo'nalishlar</a></li>
+        <li><a href="#paketlar">Paketlar</a></li>
+        <li><a href="#galereya">Galereya</a></li>
+        <li><a href="#sharhlar">Sharhlar</a></li>
+        <li><a href="#aloqa">Aloqa</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="bosh">
+      <div class="container hero-inner">
+        <span class="eyebrow" style="color:#ffb677">Sayohat olami</span>
+        <h1>Dunyoni biz bilan <em>kashf eting</em></h1>
+        <p>Turkiyadan Maldivgacha, Samarqanddan Alp tog'larigacha — orzuingizdagi sayohatni bir joyda tanlang va rejalang.</p>
+        <div class="hero-actions">
+          <a href="#paketlar" class="btn btn-accent">Paketlarni ko'rish</a>
+          <a href="#aloqa" class="btn btn-ghost">Bog'lanish</a>
+        </div>
+      </div>
+      <div class="stats">
+        <div class="container">
+          <div><strong>20+</strong><span>Yo'nalish</span></div>
+          <div><strong>10+</strong><span>Tur paketi</span></div>
+          <div><strong>24/7</strong><span>Onlayn ma'lumot</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="yonalishlar">
+      <div class="container">
+        <span class="eyebrow">Mashhur manzillar</span>
+        <h2 class="section-title">Yo'nalishlar</h2>
+        <p class="section-lead">Eng sevimli sayohat manzillarimizdan birini tanlang.</p>
+        <div class="dest-grid" id="destGrid"></div>
+      </div>
+    </section>
+
+    <section class="section packages" id="paketlar">
+      <div class="container">
+        <span class="eyebrow">Tayyor takliflar</span>
+        <h2 class="section-title">Sayohat paketlari</h2>
+        <p class="section-lead">Mehmonxona, ekskursiya va qulayliklar kiritilgan paketlar.</p>
+        <div class="filters" id="filters" role="group" aria-label="Kategoriya bo'yicha filtr"></div>
+        <div class="pkg-grid" id="pkgGrid"></div>
+      </div>
+    </section>
+
+    <section class="section" id="galereya">
+      <div class="container">
+        <span class="eyebrow">Lavhalar</span>
+        <h2 class="section-title">Galereya</h2>
+        <p class="section-lead">Sayohatchilarni ilhomlantiradigan manzaralar.</p>
+        <div class="gallery" id="gallery"></div>
+      </div>
+    </section>
+
+    <section class="section reviews" id="sharhlar">
+      <div class="container">
+        <span class="eyebrow">Fikrlar</span>
+        <h2 class="section-title">Mijozlar sharhlari</h2>
+        <p class="section-lead">Sayohatchilar sayt haqida nima deydi.</p>
+        <div class="rev-grid" id="revGrid"></div>
+      </div>
+    </section>
+
+    <section class="section" id="aloqa">
+      <div class="container contact-wrap">
+        <div>
+          <span class="eyebrow">Aloqa</span>
+          <h2 class="section-title">Sayohatni birgalikda rejalaymiz</h2>
+          <p class="section-lead">Ma'lumotlaringizni qoldiring — biz siz bilan bog'lanamiz.</p>
+          <div class="info">
+            <p><b>Telefon:</b> +998 90 000 00 00</p>
+            <p><b>Email:</b> info@travel-uz.example</p>
+            <p><b>Manzil:</b> Toshkent, O'zbekiston</p>
+          </div>
+        </div>
+        <form id="contactForm" novalidate>
+          <div class="field">
+            <label for="name">Ismingiz</label>
+            <input id="name" name="name" type="text" autocomplete="name" required placeholder="Ism familiya" />
+          </div>
+          <div class="field">
+            <label for="phone">Telefon yoki email</label>
+            <input id="phone" name="phone" type="text" autocomplete="tel" required placeholder="+998 90 123 45 67" />
+          </div>
+          <div class="field">
+            <label for="dest">Yo'nalish</label>
+            <select id="dest" name="dest"></select>
+          </div>
+          <div class="field">
+            <label for="msg">Xabar</label>
+            <textarea id="msg" name="msg" placeholder="Qachon va necha kishi sayohat qilmoqchisiz?"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Yuborish</button>
+          <p class="form-msg" id="formMsg" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site">
+    <div class="container">
+      <a href="#bosh" class="logo">TRAVEL<span style="color:var(--accent)"> UZ</span></a>
+      <p>&copy; <span id="year"></span> TRAVEL UZ. Barcha huquqlar himoyalangan.</p>
+    </div>
+  </footer>
+
+  <script>
+    const destinations = [
+      { name: "Turkiya", note: "Istanbul · Antalya · Kapadokiya", image: "img/turkiya.png" },
+      { name: "Dubay", note: "Hashamat va zamonaviylik", image: "img/dubay.png" },
+      { name: "Shveysariya", note: "Alp tog'lari va tabiat", image: "img/shveysariya.png" },
+      { name: "Maldiv orollari", note: "Okean bo'yida cheksiz sokinlik", image: "img/maldiv.png" },
+      { name: "Samarqand", note: "Registon va Sharq me'morchiligi", image: "img/hero.png" },
+      { name: "Buxoro", note: "Sharqona qadriyatlar", image: "img/buxoro.png" }
+    ];
+
+    const packages = [
+      { title: "Antalya", country: "Turkiya", category: "Dam olish", days: 5, price: 450, perks: ["Mehmonxona", "Nonushta"], image: "img/turkiya.png" },
+      { title: "Dubay", country: "BAA", category: "Shahar sayohati", days: 4, price: 520, perks: ["Shahar bo'ylab ekskursiya", "Mehmonxona"], image: "img/dubay.png" },
+      { title: "Alp tog'lari", country: "Shveysariya", category: "Tabiat", days: 6, price: 890, perks: ["Tog' manzaralari", "Mahalliy gid"], image: "img/shveysariya.png" },
+      { title: "Maldiv orollari", country: "Maldiv", category: "Dam olish", days: 5, price: 1100, perks: ["Dengiz bo'yida dam olish", "Barcha qulayliklar"], image: "img/maldiv.png" },
+      { title: "Samarqand", country: "O'zbekiston", category: "Madaniyat", days: 3, price: 220, perks: ["Tarixiy ekskursiya", "Mahalliy taomlar"], image: "img/hero.png" },
+      { title: "Buxoro", country: "O'zbekiston", category: "Madaniyat", days: 3, price: 210, perks: ["Eski shahar sayri", "Mehmonxona"], image: "img/buxoro.png" }
+    ];
+
+    const categories = ["Barchasi", "Dam olish", "Shahar sayohati", "Tabiat", "Madaniyat"];
+
+    const reviews = [
+      { quote: "Sayohatni rejalash uchun juda qulay ko'rinish. Yo'nalishlar va ma'lumotlar bir joyda jamlangan.", name: "Azizbek M.", role: "Sayohatchi" },
+      { quote: "Sayt dizayni sodda va tushunarli. Sayohat paketlarini ko'rish oson.", name: "Madina R.", role: "Sayohatchi" },
+      { quote: "Turli manzillarni ko'rib, o'zimga yoqqan joylarni tanlashim mumkin.", name: "Javohir T.", role: "Sayohatchi" }
+    ];
+
+    const $ = (id) => document.getElementById(id);
+
+    $("destGrid").innerHTML = destinations.map((d) => `
+      <a href="#paketlar" class="dest reveal">
+        <img src="${d.image}" alt="${d.name} manzarasi" loading="lazy" />
+        <div><h3>${d.name}</h3><p>${d.note}</p></div>
+      </a>`).join("");
+
+    function renderPackages(filter) {
+      $("pkgGrid").innerHTML = packages
+        .filter((p) => filter === "Barchasi" || p.category === filter)
+        .map((p) => `
+          <article class="pkg reveal in">
+            <div class="pkg-img">
+              <img src="${p.image}" alt="${p.title}, ${p.country}" loading="lazy" />
+              <span class="tag">${p.category}</span>
+            </div>
+            <div class="pkg-body">
+              <h3>${p.title}</h3>
+              <p class="country">${p.country}</p>
+              <ul class="perks">${p.perks.map((x) => `<li>${x}</li>`).join("")}</ul>
+              <div class="pkg-foot">
+                <div class="price"><small>dan boshlab</small><strong>$${p.price}</strong></div>
+                <span class="days">${p.days} kun</span>
+                <a href="#aloqa" class="btn btn-primary" data-dest="${p.title}">Band qilish</a>
+              </div>
+            </div>
+          </article>`).join("");
+    }
+
+    $("filters").innerHTML = categories.map((c, i) =>
+      `<button class="chip" type="button" aria-pressed="${i === 0}" data-cat="${c}">${c}</button>`).join("");
+    $("filters").addEventListener("click", (e) => {
+      const btn = e.target.closest(".chip");
+      if (!btn) return;
+      document.querySelectorAll(".chip").forEach((c) => c.setAttribute("aria-pressed", c === btn));
+      renderPackages(btn.dataset.cat);
+    });
+    renderPackages("Barchasi");
+
+    $("gallery").innerHTML = [...destinations.map((d) => d)].slice(0, 6).map((d) => `
+      <a href="#paketlar" class="reveal"><img src="${d.image}" alt="${d.name}" loading="lazy" /></a>`).join("");
+
+    $("revGrid").innerHTML = reviews.map((r) => `
+      <figure class="rev reveal">
+        <div class="stars" aria-label="5 yulduz">★★★★★</div>
+        <p>“${r.quote}”</p>
+        <strong>${r.name}</strong><span>${r.role}</span>
+      </figure>`).join("");
+
+    $("dest").innerHTML = packages.map((p) => `<option>${p.title}</option>`).join("");
+    $("pkgGrid").addEventListener("click", (e) => {
+      const b = e.target.closest("[data-dest]");
+      if (b) $("dest").value = b.dataset.dest;
+    });
+
+    $("contactForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const msg = $("formMsg");
+      if (!$("name").value.trim() || !$("phone").value.trim()) {
+        msg.style.color = "#b42318";
+        msg.textContent = "Iltimos, ism va aloqa ma'lumotini kiriting.";
+        return;
+      }
+      msg.style.color = "#1b7a4b";
+      msg.textContent = "Rahmat! So'rovingiz qabul qilindi, tez orada bog'lanamiz.";
+      e.target.reset();
+    });
+
+    const header = $("header");
+    const onScroll = () => header.classList.toggle("scrolled", window.scrollY > 40);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    const menu = $("menu"), menuBtn = $("menuBtn");
+    menuBtn.addEventListener("click", () => {
+      const open = menu.classList.toggle("open");
+      menuBtn.setAttribute("aria-expanded", open);
+    });
+    menu.addEventListener("click", () => { menu.classList.remove("open"); menuBtn.setAttribute("aria-expanded", false); });
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((en) => { if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll(".reveal:not(.in)").forEach((el) => io.observe(el));
+
+    $("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
